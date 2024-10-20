@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Bác sĩ Thú y</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>BIAs Pet</h2>
+            <nav>
+                <a href="#" class="nav-link" data-target="dashboard"><i class="fas fa-home mr-3"></i> Dashboard</a>
+                <a href="#" class="nav-link" data-target="schedule"><i class="fas fa-calendar-alt mr-3"></i> Thiết lập lịch</a>
+                <a href="#" class="nav-link" data-target="patients"><i class="fas fa-users mr-3"></i> Danh sách bệnh nhân</a>
+                <a href="#" class="nav-link" data-target="medical-records"><i class="fas fa-file-medical mr-3"></i> Hồ sơ y tế</a>
+                <a href="#" class="nav-link" data-target="case-management"><i class="fas fa-briefcase-medical mr-3"></i> Quản lý bệnh án</a>
+                <a href="#" class="nav-link" data-target="messages"><i class="fas fa-comments mr-3"></i> Tin nhắn</a>
+                <a href="#" class="nav-link" data-target="settings"><i class="fas fa-cog mr-3"></i> Cài đặt</a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <h1 class="greeting">Xin chào, <span id="doctorName">Bác sĩ</span>!</h1>
+            
+            <!-- Dashboard -->
+            <div id="dashboard" class="section">
+                <div class="card">
+                    <h2>Lịch hẹn hôm nay</h2>
+                    <ul class="appointment-list" id="appointmentList">
+                        <li>09:00 - Mèo Mimi (Kiểm tra sức khỏe)</li>
+                        <li>11:30 - Chó Rex (Tiêm phòng)</li>
+                        <li>14:00 - Thỏ Bông (Khám tổng quát)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Thiết lập lịch bác sĩ -->
+            <div id="schedule" class="section hidden">
+                <h2>Thiết lập lịch làm việc</h2>
+                <div class="card">
+                    <form id="work-schedule-form">
+                        <label for="work-day">Chọn thứ:</label>
+                        <select id="work-day" required>
+                            <option value="Thứ Hai">Thứ Hai</option>
+                            <option value="Thứ Ba">Thứ Ba</option>
+                            <option value="Thứ Tư">Thứ Tư</option>
+                            <option value="Thứ Năm">Thứ Năm</option>
+                            <option value="Thứ Sáu">Thứ Sáu</option>
+                            <option value="Thứ Bảy">Thứ Bảy</option>
+                            <option value="Chủ Nhật">Chủ Nhật</option>
+                        </select>
+
+                        <label for="work-date">Chọn ngày:</label>
+                        <input type="date" id="work-date" required>
+                        
+                        <label for="start-time">Giờ bắt đầu:</label>
+                        <input type="time" id="start-time" required>
+
+                        <label for="end-time">Giờ kết thúc:</label>
+                        <input type="time" id="end-time" required>
+
+                        <button type="submit" class="action-button" id="add-schedule-button">Thêm lịch</button>
+                        <button type="button" class="action-button hidden" id="update-schedule-button">Cập nhật lịch</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>Lịch làm việc đã thiết lập</h3>
+                    <table id="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Thứ</th>
+                                <th>Ngày</th>
+                                <th>Giờ bắt đầu</th>
+                                <th>Giờ kết thúc</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-list">
+                            <!-- Lịch làm việc sẽ được thêm vào đây -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Danh sách bệnh nhân -->
+            <div id="patients" class="section hidden">
+                <h2>Danh sách bệnh nhân</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên thú cưng</th>
+                            <th>Loài</th>
+                            <th>Chủ nhân</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mimi</td>
+                            <td>Nguyễn Văn A</td>
+                            <td>0123456789</td>
+                            <td><button class="view-profile-button" data-pet="Mimi" data-species="Mèo" data-owner="Nguyễn Văn A" data-phone="0123456789" data-disease="Tiêu chảy">Xem hồ sơ</button></td>
+                        </tr>
+                        <tr>
+                            <td>Rex</td>
+                            <td>Trần Thị B</td>
+                            <td>0987654321</td>
+                            <td><button class="view-profile-button" data-pet="Rex" data-species="Chó" data-owner="Trần Thị B" data-phone="0987654321" data-disease="Lông rụng từng mảng">Xem hồ sơ</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="patient-details" class="section hidden">
+                <h2>Hồ sơ chi tiết</h2>
+                <div class="card">
+                    <p><strong>Tên thú cưng:</strong> <span id="detail-pet-name"></span></p>
+                    <p><strong>Loài:</strong> <span id="detail-pet-species"></span></p>
+                    <p><strong>Chủ nhân:</strong> <span id="detail-owner-name"></span></p>
+                    <p><strong>Số điện thoại:</strong> <span id="detail-owner-phone"></span></p>
+                    <p><strong>Triệu chứng:</strong> <span id="detail-disease"></span></p>
+                    <button class="action-button cancel-button">Quay lại</button>
+                </div>
+            </div>
+
+
+            <!-- Hồ sơ y tế -->
+            <div id="medical-records" class="section hidden">
+                <h2>Hồ sơ y tế</h2>
+                <div class="card">
+                    <h3>Tìm kiếm hồ sơ</h3>
+                    <input type="text" placeholder="Nhập tên thú cưng hoặc chủ nhân">
+                    <button class="action-button">Tìm kiếm</button>
+                </div>
+                <div class="card">
+                    <h3>Kết quả tìm kiếm</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tên thú cưng</th>
+                                <th>Chủ nhân</th>
+                                <th>Ngày khám gần nhất</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mimi</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>15/05/2023</td>
+                                <td><button class="action-button">Xem chi tiết</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Quản lý bệnh án -->
+            <div id="case-management" class="section hidden">
+                <h2>Quản lý bệnh án</h2>
+                <div class="card">
+                    <h3>Bệnh án đang điều trị</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tên thú cưng</th>
+                                <th>Chẩn đoán</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rex</td>
+                                <td>Viêm da</td>
+                                <td>10/05/2023</td>
+                                <td>Đang điều trị</td>
+                                <td><button class="action-button">Cập nhật</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="action-button">Tạo bệnh án mới</button>
+            </div>
+
+            <!-- Tin nhắn -->
+            <div id="messages" class="section hidden">
+                <h2>Tin nhắn</h2>
+                <div class="card">
+                    <h3>Hộp thư đến</h3>
+                    <ul class="message-list">
+                        <li>
+                            <strong>Nguyễn Văn A:</strong> Xin hỏi về lịch tái khám cho Mimi
+                            <button class="action-button">Trả lời</button>
+                        </li>
+                        <li>
+                            <strong>Trần Thị B:</strong> Cảm ơn bác sĩ đã chăm sóc Rex
+                            <button class="action-button">Trả lời</button>
+                        </li>
+                    </ul>
+                </div>
+                <button class="action-button">Soạn tin nhắn mới</button>
+            </div>
+
+            <!-- Cài đặt -->
+            <div id="settings" class="section hidden">
+                <h2>Cài đặt</h2>
+                <div class="card">
+                    <h3>Thông tin cá nhân</h3>
+                    <form>
+                        <label for="name">Tên:</label>
+                        <input type="text" id="name" value="Nguyễn Văn A">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" value="nguyenvana@example.com">
+                        <label for="phone">Số điện thoại:</label>
+                        <input type="tel" id="phone" value="0123456789">
+                        <button class="action-button">Cập nhật thông tin</button>
+                    </form>
+                </div>
+                <div class="card">
+                    <h3>Đổi mật khẩu</h3>
+                    <form>
+                        <label for="current-password">Mật khẩu hiện tại:</label>
+                        <input type="password" id="current-password">
+                        <label for="new-password">Mật khẩu mới:</label>
+                        <input type="password" id="new-password">
+                        <label for="confirm-password">Xác nhận mật khẩu mới:</label>
+                        <input type="password" id="confirm-password">
+                        <button class="action-button">Đổi mật khẩu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="style.js"></script> 
+
+</body>
+</html>
