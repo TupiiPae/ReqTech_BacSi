@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Bác sĩ Thú y</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            color: #333;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .current-date {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .current-date i {
+            margin-right: 8px;
+            color: #4a90e2;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-header i {
+            margin-right: 10px;
+            color: #4a90e2;
+        }
+
+        .card-header h2 {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .appointment-item {
+            background: #f8f9ff;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .appointment-time {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .appointment-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .status-upcoming {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-confirmed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .appointment-details {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .future-date {
+            border-left: 4px solid #4a90e2;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .future-date h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0 20px 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4a90e2;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1>Xin chào, Bác sĩ!</h1>
+        <div class="current-date">
+            <i class="fas fa-calendar"></i>
+            <span id="currentDate">Thứ Tư, ngày 23 tháng 10 năm 2024</span>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Today's Appointments -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <i class="fas fa-clock"></i>
+                <h2>Lịch hẹn hôm nay</h2>
+            </div>
+            <div class="appointment-item">
+                <div class="appointment-header">
+                    <span class="appointment-time">09:00 - Mèo Mimi</span>
+                    <span class="appointment-status status-upcoming">Sắp tới</span>
+                </div>
+                <div class="appointment-details">
+                    <p>Kiểm tra sức khỏe</p>
+                    <p>Chủ nhân: Nguyễn Văn A</p>
+                </div>
+            </div>
+            <div class="appointment-item">
+                <div class="appointment-header">
+                    <span class="appointment-time">11:30 - Chó Rex</span>
+                    <span class="appointment-status status-confirmed">Đã xác nhận</span>
+                </div>
+                <div class="appointment-details">
+                    <p>Tiêm phòng</p>
+                    <p>Chủ nhân: Trần Thị B</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Appointments -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <i class="fas fa-calendar-alt"></i>
+                <h2>Lịch hẹn sắp tới</h2>
+            </div>
+            <div class="future-date">
+                <h3>Ngày mai - 24/10/2024</h3>
+                <div class="appointment-item">
+                    <div class="appointment-header">
+                        <span class="appointment-time">10:00 - Thỏ Bông</span>
+                    </div>
+                    <div class="appointment-details">
+                        <p>Khám tổng quát</p>
+                    </div>
+                </div>
+            </div>
+            <div class="future-date">
+                <h3>25/10/2024</h3>
+                <div class="appointment-item">
+                    <div class="appointment-header">
+                        <span class="appointment-time">14:30 - Hamster Bé Na</span>
+                    </div>
+                    <div class="appointment-details">
+                        <p>Tái khám</p>
+                    </div>
+                </div>
+                <div class="appointment-item">
+                    <div class="appointment-header">
+                        <span class="appointment-time">16:00 - Mèo Tom</span>
+                    </div>
+                    <div class="appointment-details">
+                        <p>Tiêm phòng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Tổng lịch hẹn</h3>
+            <div class="stat-number">5</div>
+            <div class="stat-label">Trong tuần này</div>
+        </div>
+        <div class="stat-card">
+            <h3>Lịch chờ xác nhận</h3>
+            <div class="stat-number">3</div>
+            <div class="stat-label">Cần phản hồi</div>
+        </div>
+        <div class="stat-card">
+            <h3>Bệnh nhân mới</h3>
+            <div class="stat-number">2</div>
+            <div class="stat-label">Trong tháng này</div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+            <!-- Dashboard -->
+            <div id="dashboard" class="section">
+                <div class="card">
+                    <h2>Lịch hẹn hôm nay</h2>
+                    <ul class="appointment-list" id="appointmentList">
+                        <li>09:00 - Mèo Mimi (Kiểm tra sức khỏe)</li>
+                        <li>11:30 - Chó Rex (Tiêm phòng)</li>
+                        <li>14:00 - Thỏ Bông (Khám tổng quát)</li>
+                    </ul>
+                </div>
+            </div>

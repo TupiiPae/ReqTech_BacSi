@@ -6,6 +6,7 @@
     <title>Dashboard Bác sĩ Thú y</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="accept.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -14,6 +15,7 @@
             <nav>
                 <a href="#" class="nav-link" data-target="dashboard"><i class="fas fa-home mr-3"></i> Dashboard</a>
                 <a href="#" class="nav-link" data-target="schedule"><i class="fas fa-calendar-alt mr-3"></i> Thiết lập lịch</a>
+                <a href="#" class="nav-link" data-target="accept"><i class="fas fa-clock mr-3"></i> Lịch hẹn chờ</a>
                 <a href="#" class="nav-link" data-target="patients"><i class="fas fa-users mr-3"></i> Danh sách bệnh nhân</a>
                 <a href="#" class="nav-link" data-target="medical-records"><i class="fas fa-file-medical mr-3"></i> Hồ sơ y tế</a>
                 <a href="#" class="nav-link" data-target="case-management"><i class="fas fa-briefcase-medical mr-3"></i> Quản lý bệnh án</a>
@@ -85,7 +87,79 @@
                     </table>
                 </div>
             </div>
+         
+            <!-- Xác nhận lịch-->
+             <div id="accept" class="section hidden">
+                <h2>Xác nhận lịch hẹn</h2>
+                <table>
+                    <div class="appointment-card">
+                        <div class="appointment-header">
+                            <span class="pet-name">Mèo Mimi</span>
+                            <span class="status-badge status-pending">Đang chờ</span>
+                        </div>
+                        <div class="appointment-details">
+                            <p class="detail-item"><i class="fas fa-user"></i> Chủ nhân: Nguyễn Văn A</p>
+                            <p class="detail-item"><i class="fas fa-clock"></i> Thời gian: 09:00 - 24/10/2024</p>
+                            <p class="detail-item"><i class="fas fa-notes-medical"></i> Lý do: Kiểm tra sức khỏe</p>
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="btn btn-confirm" onclick="showConfirmModal('Mimi')">Xác nhận</button>
+                            <button class="btn btn-reject" onclick="showRejectModal('Mimi')">Từ chối</button>
+                        </div>
+                    </div>
+    
+                    <div class="appointment-card">
+                        <div class="appointment-header">
+                            <span class="pet-name">Chó Rex</span>
+                            <span class="status-badge status-pending">Đang chờ</span>
+                        </div>
+                        <div class="appointment-details">
+                            <p class="detail-item"><i class="fas fa-user"></i> Chủ nhân: Trần Thị B</p>
+                            <p class="detail-item"><i class="fas fa-clock"></i> Thời gian: 11:30 - 24/10/2024</p>
+                            <p class="detail-item"><i class="fas fa-notes-medical"></i> Lý do: Tiêm phòng</p>
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="btn btn-confirm" onclick="showConfirmModal('Rex')">Xác nhận</button>
+                            <button class="btn btn-reject" onclick="showRejectModal('Rex')">Từ chối</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Confirm Modal -->
+                <div id="confirmModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('confirmModal')">&times;</span>
+                        <div class="modal-header">
+                            <h2 class="modal-title">Xác nhận lịch hẹn</h2>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn xác nhận lịch hẹn cho <span id="confirmPetName"></span>?</p>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn btn-reject" onclick="closeModal('confirmModal')">Hủy</button>
+                            <button class="btn btn-confirm" onclick="confirmAppointment()">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Reject Modal -->
+                <div id="rejectModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('rejectModal')">&times;</span>
+                        <div class="modal-header">
+                            <h2 class="modal-title">Từ chối lịch hẹn</h2>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn từ chối lịch hẹn cho <span id="rejectPetName"></span>?</p>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn btn-confirm" onclick="closeModal('rejectModal')">Hủy</button>
+                            <button class="btn btn-reject" onclick="rejectAppointment()">Từ chối</button>
+                        </div>
+                    </div>
+                </div>
+                </table>
+             </div>
+            
             <!-- Danh sách bệnh nhân -->
             <div id="patients" class="section hidden">
                 <h2>Danh sách bệnh nhân</h2>

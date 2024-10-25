@@ -1,5 +1,5 @@
 // Thêm tên bác sĩ
-document.getElementById('doctorName').textContent = 'Nguyễn Văn A';
+document.getElementById('doctorName').textContent = 'TupiiPae';
 
 // Xử lý chuyển đổi giữa các trang
 document.querySelectorAll('.nav-link').forEach(link => {
@@ -170,4 +170,40 @@ document.querySelector('.cancel-button').addEventListener('click', function () {
     showSection('patients');
 });
 
+// Thao tác xác nhận 
+let currentPetName = '';
 
+function showConfirmModal(petName) {
+    currentPetName = petName;
+    document.getElementById('confirmPetName').textContent = petName;
+    document.getElementById('confirmModal').style.display = 'block';
+}
+
+function showRejectModal(petName) {
+    currentPetName = petName;
+    document.getElementById('rejectPetName').textContent = petName;
+    document.getElementById('rejectModal').style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+function confirmAppointment() {
+    // Thực hiện logic xác nhận lịch hẹn ở đây
+    alert(`Đã xác nhận lịch hẹn cho ${currentPetName}`);
+    closeModal('confirmModal');
+}
+
+function rejectAppointment() {
+    // Thực hiện logic từ chối lịch hẹn ở đây
+    alert(`Đã từ chối lịch hẹn cho ${currentPetName}`);
+    closeModal('rejectModal');
+}
+
+// Đóng modal khi click bên ngoài
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = 'none';
+    }
+}
