@@ -7,6 +7,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <link href="accept.css" rel="stylesheet">
+    <link href="medprof.css" rel="stylesheet">
+    <link href="cusprof.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -16,11 +18,11 @@
                 <a href="#" class="nav-link" data-target="dashboard"><i class="fas fa-home mr-3"></i> Dashboard</a>
                 <a href="#" class="nav-link" data-target="schedule"><i class="fas fa-calendar-alt mr-3"></i> Thiết lập lịch</a>
                 <a href="#" class="nav-link" data-target="accept"><i class="fas fa-clock mr-3"></i> Lịch hẹn chờ</a>
-                <a href="#" class="nav-link" data-target="patients"><i class="fas fa-users mr-3"></i> Danh sách bệnh nhân</a>
-                <a href="#" class="nav-link" data-target="medical-records"><i class="fas fa-file-medical mr-3"></i> Hồ sơ y tế</a>
-                <a href="#" class="nav-link" data-target="case-management"><i class="fas fa-briefcase-medical mr-3"></i> Quản lý bệnh án</a>
+                <a href="#" class="nav-link" data-target="customer-records"><i class="fas fa-users mr-3"></i> Hồ sơ khách hàng</a>
+                <a href="#" class="nav-link" data-target="medical-records"><i class="fas fa-file-medical mr-3"></i> Hồ sơ bệnh án</a>
                 <a href="#" class="nav-link" data-target="messages"><i class="fas fa-comments mr-3"></i> Tin nhắn</a>
                 <a href="#" class="nav-link" data-target="settings"><i class="fas fa-cog mr-3"></i> Cài đặt</a>
+                
             </nav>
         </div>
 
@@ -160,106 +162,214 @@
                 </table>
              </div>
             
-            <!-- Danh sách bệnh nhân -->
-            <div id="patients" class="section hidden">
-                <h2>Danh sách bệnh nhân</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tên thú cưng</th>
-                            <th>Loài</th>
-                            <th>Chủ nhân</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mimi</td>
-                            <td>Nguyễn Văn A</td>
-                            <td>0123456789</td>
-                            <td><button class="view-profile-button" data-pet="Mimi" data-species="Mèo" data-owner="Nguyễn Văn A" data-phone="0123456789" data-disease="Tiêu chảy">Xem hồ sơ</button></td>
-                        </tr>
-                        <tr>
-                            <td>Rex</td>
-                            <td>Trần Thị B</td>
-                            <td>0987654321</td>
-                            <td><button class="view-profile-button" data-pet="Rex" data-species="Chó" data-owner="Trần Thị B" data-phone="0987654321" data-disease="Lông rụng từng mảng">Xem hồ sơ</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <!-- Hồ sơ khách hàng -->
+            <!-- Customer Records Section -->
+            <div id="customer-records" class="section hidden">
+                <h2>Hồ sơ khách hàng</h2>
 
-            <div id="patient-details" class="section hidden">
-                <h2>Hồ sơ chi tiết</h2>
-                <div class="card">
-                    <p><strong>Tên thú cưng:</strong> <span id="detail-pet-name"></span></p>
-                    <p><strong>Loài:</strong> <span id="detail-pet-species"></span></p>
-                    <p><strong>Chủ nhân:</strong> <span id="detail-owner-name"></span></p>
-                    <p><strong>Số điện thoại:</strong> <span id="detail-owner-phone"></span></p>
-                    <p><strong>Triệu chứng:</strong> <span id="detail-disease"></span></p>
-                    <button class="action-button cancel-button">Quay lại</button>
-                </div>
-            </div>
-
-
-            <!-- Hồ sơ y tế -->
-            <div id="medical-records" class="section hidden">
-                <h2>Hồ sơ y tế</h2>
+                <!-- Search Customer Records -->
                 <div class="card">
                     <h3>Tìm kiếm hồ sơ</h3>
-                    <input type="text" placeholder="Nhập tên thú cưng hoặc chủ nhân">
-                    <button class="action-button">Tìm kiếm</button>
+                    <div class="search-container">
+                        <input type="text" id="search-medical" placeholder="Tìm kiếm theo tên chủ nhân hoặc số điện thoại">
+                        <button class="action-button">Tìm kiếm</button>
+                    </div>
                 </div>
+
+                <!-- Customer Records List -->
                 <div class="card">
-                    <h3>Kết quả tìm kiếm</h3>
-                    <table>
+                    <h3>Danh sách hồ sơ khách hàng</h3>
+                    <table class="customer-records-table">
                         <thead>
                             <tr>
-                                <th>Tên thú cưng</th>
-                                <th>Chủ nhân</th>
-                                <th>Ngày khám gần nhất</th>
+                                <th>Khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Mimi</td>
                                 <td>Nguyễn Văn A</td>
-                                <td>15/05/2023</td>
-                                <td><button class="action-button">Xem chi tiết</button></td>
+                                <td>0123456789</td>
+                                <td>343/18A Tô Hiến Thành</td>
+                                <td>
+                                    <button class="action-button view-prof-btn" data-customer-id="1">Xem hồ sơ</button>
+                                    <button class="action-button delete-btn">Xóa</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Trần Thị B</td>
+                                <td>0987654321</td>
+                                <td>339/6E Sư Vạn Hạnh</td>
+                                <td>
+                                    <button class="action-button view-prof-btn" data-customer-id="2">Xem hồ sơ</button>
+                                    <button class="action-button delete-btn">Xóa</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Customer Details Modal -->
+                <div id="customer-details-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <span class="closee" onclick="closeModal()">&times;</span>
+                        <h2>Chi tiết hồ sơ khách hàng</h2>
+
+                        <!-- Customer Information -->
+                        <div class="customer-info">
+                            <div class="detail-row">
+                                <label>Tên khách hàng:</label>
+                                <span id="customer-name">Nguyễn Văn A</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Số điện thoại:</label>
+                                <span id="customer-phone">0123456789</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Địa chỉ:</label>
+                                <span id="customer-address">343/18A Tô Hiến Thành</span>
+                            </div>
+                        </div>
+
+                        <!-- Booking History -->
+                        <h3>Lịch sử đặt lịch</h3>
+                        <table class="booking-history-table">
+                            <thead>
+                                <tr>
+                                    <th>Ngày đặt lịch</th>
+                                    <th>Giờ đặt lịch</th>
+                                    <th>Hạng mục điều trị</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="booking-history">
+                                <!-- Sample Booking Data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-            <!-- Quản lý bệnh án -->
-            <div id="case-management" class="section hidden">
-                <h2>Quản lý bệnh án</h2>
+            
+
+            <!-- Hồ sơ bệnh án -->
+            <div id="medical-records" class="section hidden">
+                <h2>Hồ sơ bệnh án</h2>
                 <div class="card">
-                    <h3>Bệnh án đang điều trị</h3>
-                    <table>
+                    <h3>Tìm kiếm hồ sơ</h3>
+                    <div class="search-container">
+                        <input type="text" id="search-medical" placeholder="Tìm kiếm theo tên chủ nhân hoặc số điện thoại">
+                        <button class="action-button">Tìm kiếm</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Danh sách hồ sơ bệnh án</h3>
+                    <table class="medical-records-table">
                         <thead>
                             <tr>
-                                <th>Tên thú cưng</th>
-                                <th>Chẩn đoán</th>
-                                <th>Ngày bắt đầu</th>
+                                <th>Chủ nhân</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày khám</th>
                                 <th>Trạng thái</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Rex</td>
-                                <td>Viêm da</td>
-                                <td>10/05/2023</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>0123456789</td>
+                                <td>24/10/2023</td>
                                 <td>Đang điều trị</td>
-                                <td><button class="action-button">Cập nhật</button></td>
+                                <td>
+                                    <button class="action-button view-details-btn" onclick="showMedicalDetails(1)">Xem chi tiết</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Trần Thị B</td>
+                                <td>0987654321</td>
+                                <td>23/10/2023</td>
+                                <td>Hoàn thành</td>
+                                <td>
+                                    <button class="action-button view-details-btn" onclick="showMedicalDetails(2)">Xem chi tiết</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <button class="action-button">Tạo bệnh án mới</button>
+
+                <!-- Medical Record Details Modal -->
+                    <div id="medical-details-modal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Chi tiết hồ sơ bệnh án</h2>
+                
+                        <!-- View Mode -->
+                        <div class="medical-details view-mode">
+                            <div class="detail-row">
+                                <label>Chủ nhân:</label>
+                                <span id="owner-name">Nguyễn Văn A</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Tên thú cưng:</label>
+                                <span id="pet-name">Mimi</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Loài:</label>
+                                <span id="pet-species">Mèo</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Số điện thoại:</label>
+                                <span id="owner-phone">0123456789</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Ngày khám:</label>
+                                <span id="exam-date">24/10/2023</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Triệu chứng:</label>
+                                <span id="symptoms">Ngứa, đỏ, rụng lông</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Chẩn đoán:</label>
+                                <span id="diagnosis">Viêm da cấp tính</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Trạng thái:</label>
+                                <span id="status">Đang điều trị</span>
+                            </div>
+                            <div class="modal-actions">
+                                <button class="action-button update-btn">Cập nhật</button>
+                                <button class="action-button delete-btn">Xóa</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Edit Mode (hidden by default) -->
+                        <div class="medical-details edit-mode hidden">
+                            <div class="detail-row">
+                                <label>Chẩn đoán:</label>
+                                <input type="text" id="edit-diagnosis" value="Viêm da cấp tính">
+                            </div>
+                            <div class="detail-row">
+                                <label>Triệu chứng:</label>
+                                <input type="text" id="edit-symptoms" value="Ngứa, đỏ, rụng lông">
+                            </div>
+                            <div class="detail-row">
+                                <label>Trạng thái:</label>
+                                <select id="edit-status">
+                                    <option value="Đang điều trị">Đang điều trị</option>
+                                    <option value="Hoàn thành">Hoàn thành</option>
+                                </select>
+                            </div>
+                            <div class="modal-actions">
+                                <button class="action-button save-btn">Lưu</button>
+                                <button class="action-button cancel-btn">Hủy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Tin nhắn -->
