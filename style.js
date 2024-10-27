@@ -28,13 +28,6 @@ function showSection(sectionId) {
 
 
 //------------------------------------------------------------------------------------------------------------------------------------//
-// Thêm chức năng đánh dấu lịch hẹn đã hoàn thành
-document.getElementById('appointmentList').addEventListener('click', function(e) {
-    if (e.target.tagName === 'LI') {
-        e.target.style.textDecoration = e.target.style.textDecoration === 'line-through' ? 'none' : 'line-through';
-    }
-});
-
 
 //------------------------------------------------------------------------------------------------------------------------------------//
 // Thêm sự kiện cho các nút "Hủy" hoặc "Trở về"
@@ -168,7 +161,7 @@ const customersData = {
     }
 };
 
-// Hiển thị modal chi tiết khách hàng
+// Display customer details modal
 function showCustomerDetails(id) {
     console.log("Opening customer details for ID:", id);
     
@@ -180,12 +173,12 @@ function showCustomerDetails(id) {
         return;
     }
 
-    // Cập nhật thông tin khách hàng
+    // Update customer information
     document.getElementById("customer-name").textContent = customer.name;
     document.getElementById("customer-phone").textContent = customer.phone;
     document.getElementById("customer-address").textContent = customer.address;
 
-    // Cập nhật lịch sử đặt lịch
+    // Update booking history
     const bookingHistory = document.getElementById("booking-history");
     bookingHistory.innerHTML = customer.bookings.map(booking => `
         <tr>
@@ -199,19 +192,19 @@ function showCustomerDetails(id) {
         </tr>
     `).join('');
 
-    // Hiển thị modal
+    // Show modal
     modal.classList.remove('hidden');
     modal.classList.add('show');
 }
 
-// Đóng modal
-function closeModal() {
+// Close the customer details modal
+function closeCusModal() {
     const modal = document.getElementById("customer-details-modal");
     modal.classList.remove('show');
     modal.classList.add('hidden');
 }
 
-// Xóa lịch đặt
+// Delete booking function
 function deleteBooking(bookingId) {
     console.log("Deleting booking ID:", bookingId);
     const bookingRow = document.querySelector(`button[onclick="deleteBooking(${bookingId})"]`).closest("tr");
@@ -220,12 +213,7 @@ function deleteBooking(bookingId) {
     }
 }
 
-// Đóng modal khi click ngoài modal
-document.querySelector(".closee").onclick = function () {
-    document.getElementById("customer-details-modal").style.display = "none";
-};
-
-// Thêm event listener cho các nút xem hồ sơ
+// Add event listener for profile view buttons
 document.addEventListener('DOMContentLoaded', function() {
     const viewButtons = document.querySelectorAll('.view-prof-btn');
     viewButtons.forEach(button => {
@@ -238,47 +226,46 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 //------------------------------------------------------------------------------------------------------------------------------------//
-// Thao tác xác nhận 
+// Confirmation Actions
 let currentPetName = '';
+
+// Show confirmation modal
 function showConfirmModal(petName) {
     currentPetName = petName;
     document.getElementById('confirmPetName').textContent = petName;
     document.getElementById('confirmModal').style.display = 'block';
 }
+
+// Show rejection modal
 function showRejectModal(petName) {
     currentPetName = petName;
     document.getElementById('rejectPetName').textContent = petName;
     document.getElementById('rejectModal').style.display = 'block';
 }
+
+// Close specific modal
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
+
+// Confirm appointment function
 function confirmAppointment() {
-    // Thực hiện logic xác nhận lịch hẹn ở đây
     alert(`Đã xác nhận lịch hẹn cho ${currentPetName}`);
     closeModal('confirmModal');
 }
+
+// Reject appointment function
 function rejectAppointment() {
-    // Thực hiện logic từ chối lịch hẹn ở đây
     alert(`Đã từ chối lịch hẹn cho ${currentPetName}`);
     closeModal('rejectModal');
 }
-// Đóng modal khi click bên ngoài
-window.onclick = function(event) {
-    if (event.target.className === 'modal') {
-        event.target.style.display = 'none';
-    }
-}
-
 
 //------------------------------------------------------------------------------------------------------------------------------------//
 // JavaScript for Veterinary Medical Records Interface
 
 // Show medical record details modal
 function showMedicalDetails(recordId) {
-    // Retrieve record data based on recordId (you can replace this with a dynamic call to fetch data)
     const recordData = {
         1: {
             ownerName: "Nguyễn Văn A",
@@ -302,7 +289,6 @@ function showMedicalDetails(recordId) {
         }
     };
 
-    // Populate modal with data
     const record = recordData[recordId];
     if (record) {
         document.getElementById("owner-name").textContent = record.ownerName;
@@ -319,12 +305,11 @@ function showMedicalDetails(recordId) {
         document.getElementById("edit-diagnosis").value = record.diagnosis;
         document.getElementById("edit-status").value = record.status;
 
-        // Show the modal
         document.getElementById("medical-details-modal").style.display = "block";
     }
 }
 
-// Close modal
+// Close medical record details modal
 document.querySelector(".close").onclick = function () {
     document.getElementById("medical-details-modal").style.display = "none";
 };
@@ -337,17 +322,14 @@ document.querySelector(".update-btn").onclick = function () {
 
 // Save updated record
 document.querySelector(".save-btn").onclick = function () {
-    // Get updated values from form fields
     const updatedDiagnosis = document.getElementById("edit-diagnosis").value;
     const updatedSymptoms = document.getElementById("edit-symptoms").value;
     const updatedStatus = document.getElementById("edit-status").value;
 
-    // Update display in view mode
     document.getElementById("symptoms").textContent = updatedSymptoms;
     document.getElementById("diagnosis").textContent = updatedDiagnosis;
     document.getElementById("status").textContent = updatedStatus;
 
-    // Switch back to view mode
     document.querySelector(".edit-mode").classList.add("hidden");
     document.querySelector(".view-mode").classList.remove("hidden");
 
@@ -368,5 +350,6 @@ document.querySelector(".delete-btn").onclick = function () {
         document.getElementById("medical-details-modal").style.display = "none";
     }
 };
+
 
 //------------------------------------------------------------------------------------------------------------------------------------//

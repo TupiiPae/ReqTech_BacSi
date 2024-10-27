@@ -6,6 +6,7 @@
     <title>Dashboard Bác sĩ Thú y</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="db.css" rel="stylesheet">
     <link href="accept.css" rel="stylesheet">
     <link href="medprof.css" rel="stylesheet">
     <link href="cusprof.css" rel="stylesheet">
@@ -15,7 +16,7 @@
         <div class="sidebar">
             <h2>BIAs Pet</h2>
             <nav>
-                <a href="#" class="nav-link" data-target="dashboard"><i class="fas fa-home mr-3"></i> Dashboard</a>
+                <a href="#" class="nav-link" data-target="dashboard"><i class="fas fa-home mr-3"></i> Trang chủ</a>
                 <a href="#" class="nav-link" data-target="schedule"><i class="fas fa-calendar-alt mr-3"></i> Thiết lập lịch</a>
                 <a href="#" class="nav-link" data-target="accept"><i class="fas fa-clock mr-3"></i> Lịch hẹn chờ</a>
                 <a href="#" class="nav-link" data-target="customer-records"><i class="fas fa-users mr-3"></i> Hồ sơ khách hàng</a>
@@ -31,13 +32,88 @@
             
             <!-- Dashboard -->
             <div id="dashboard" class="section">
-                <div class="card">
-                    <h2>Lịch hẹn hôm nay</h2>
-                    <ul class="appointment-list" id="appointmentList">
-                        <li>09:00 - Mèo Mimi (Kiểm tra sức khỏe)</li>
-                        <li>11:30 - Chó Rex (Tiêm phòng)</li>
-                        <li>14:00 - Thỏ Bông (Khám tổng quát)</li>
-                    </ul>
+                <div class="dashboard-grid">
+                    <!-- Today's Appointments -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-clock"></i>Lịch hẹn hôm nay</h2>
+                        </div>
+                        <div class="dasboard-item">
+                            <div class="dasboard-header">
+                                <span class="dasboard-time">09:00 - Mèo Mimi</span>
+                                <span class="dasboard-status status-upcoming">Sắp tới</span>
+                            </div>
+                            <div class="dasboard-details">
+                                <p>Kiểm tra sức khỏe</p>
+                                <p>Chủ nhân: Nguyễn Văn A</p>
+                            </div>
+                        </div>
+                        <div class="dasboard-item">
+                            <div class="dasboard-header">
+                                <span class="dasboard-time">11:30 - Chó Rex</span>
+                                <span class="dasboard-status status-confirmed">Đã xác nhận</span>
+                            </div>
+                            <div class="dasboard-details">
+                                <p>Tiêm phòng</p>
+                                <p>Chủ nhân: Trần Thị B</p>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Upcoming Appointments -->
+                    <div class="card">
+                        <div class="card-header">                
+                            <h2><i class="fas fa-calendar-alt"></i>Lịch hẹn sắp tới</h2>
+                        </div>
+                        <div class="future-date">
+                            <h3>Ngày mai - 24/10/2024</h3>
+                            <div class="dasboard-item">
+                                <div class="dasboard-header">
+                                    <span class="dasboard-time">10:00 - Thỏ Bông</span>
+                                </div>
+                                <div class="dasboard-details">
+                                    <p>Khám tổng quát</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="future-date">
+                            <h3>25/10/2024</h3>
+                            <div class="dasboard-item">
+                                <div class="dasboard-header">
+                                    <span class="dasboard-time">14:30 - Hamster Bé Na</span>
+                                </div>
+                                <div class="dasboard-details">
+                                    <p>Tái khám</p>
+                                </div>
+                            </div>
+                            <div class="dasboard-item">
+                                <div class="dasboard-header">
+                                    <span class="dasboard-time">16:00 - Mèo Tom</span>
+                                </div>
+                                <div class="dasboard-details">
+                                    <p>Tiêm phòng</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Tổng lịch hẹn</h3>
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Trong tuần này</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Lịch chờ xác nhận</h3>
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Cần phản hồi</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Bệnh nhân mới</h3>
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Trong tháng này</div>
+                    </div>
                 </div>
             </div>
 
@@ -214,7 +290,7 @@
                 <!-- Customer Details Modal -->
                 <div id="customer-details-modal" class="modal hidden">
                     <div class="modal-content">
-                        <span class="closee" onclick="closeModal()">&times;</span>
+                        <span class="closee" onclick="closeCusModal()">&times;</span>
                         <h2>Chi tiết hồ sơ khách hàng</h2>
 
                         <!-- Customer Information -->
