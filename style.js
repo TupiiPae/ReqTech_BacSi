@@ -272,7 +272,7 @@ function showMedicalDetails(recordId) {
             petName: "Mimi",
             petSpecies: "Mèo",
             ownerPhone: "0123456789",
-            examDate: "24/10/2023",
+            examDate: "24/10/2024",
             symptoms: "Ngứa, đỏ, rụng lông",
             diagnosis: "Viêm da cấp tính",
             status: "Đang điều trị"
@@ -282,7 +282,7 @@ function showMedicalDetails(recordId) {
             petName: "Lulu",
             petSpecies: "Chó",
             ownerPhone: "0987654321",
-            examDate: "23/10/2023",
+            examDate: "23/10/2024",
             symptoms: "Sốt, mệt mỏi, chán ăn",
             diagnosis: "Hoàn thành",
             status: "Hoàn thành"
@@ -351,5 +351,60 @@ document.querySelector(".delete-btn").onclick = function () {
     }
 };
 
+// Function to show the new medical record modal
+function showCreateMedicalRecordForm() {
+    const modal = document.getElementById('new-medical-record-modal');
+    modal.style.display = 'block';
+}
+
+// Function to close the new medical record modal
+function closeNewMedicalRecordModal() {
+    const modal = document.getElementById('new-medical-record-modal');
+    modal.style.display = 'none';
+}
+
+// Function to handle form submission
+document.getElementById('new-medical-record-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Collect form data
+    const ownerName = document.getElementById('owner-name').value;
+    const petName = document.getElementById('pet-name').value;
+    const petSpecies = document.getElementById('pet-species').value;
+    const ownerPhone = document.getElementById('owner-phone').value;
+    const examDate = document.getElementById('exam-date').value;
+    const reExamDate = document.getElementById('re-exam').value;
+    const symptoms = document.getElementById('symptoms').value;
+    const diagnosis = document.getElementById('diagnosis').value;
+    const status = document.getElementById('status').value;
+
+    // Create a new medical record object (You can send this to the server or handle it as needed)
+    const newMedicalRecord = {
+        ownerName,
+        petName,
+        petSpecies,
+        ownerPhone,
+        examDate,
+        reExamDate,
+        symptoms,
+        diagnosis,
+        status
+    };
+
+    console.log('New Medical Record:', newMedicalRecord); // For demonstration, log to the console
+
+    // Optionally, you could send this data to a server via AJAX or Fetch API
+
+    // Close the modal after saving
+    closeNewMedicalRecordModal();
+});
+
+// Close the modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('new-medical-record-modal');
+    if (event.target === modal) {
+        closeNewMedicalRecordModal();
+    }
+};
 
 //------------------------------------------------------------------------------------------------------------------------------------//
