@@ -408,3 +408,47 @@ window.onclick = function(event) {
 };
 
 //------------------------------------------------------------------------------------------------------------------------------------//
+
+// Lấy các elements
+const modal = document.getElementById('replyModal');
+const span = document.getElementsByClassName('close')[0];
+const replyButtons = document.querySelectorAll('.action-button');
+const replyTo = document.getElementById('replyTo');
+const replyForm = document.querySelector('.reply-form');
+
+// Thêm sự kiện click cho các nút trả lời
+replyButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        const messageItem = e.target.parentElement;
+        const sender = messageItem.querySelector('strong').textContent;
+        const message = messageItem.textContent.split(':')[1].split('Trả lời')[0].trim();
+        
+        replyTo.innerHTML = `<strong>Gửi đến:</strong> ${sender}<br><strong>Tin nhắn gốc:</strong> ${message}`;
+        modal.style.display = 'block';
+    });
+});
+
+// Đóng modal khi click vào nút close
+span.onclick = function() {
+    modal.style.display = 'none';
+}
+
+// Đóng modal khi click bên ngoài
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Xử lý submit form
+replyForm.onsubmit = function(e) {
+    e.preventDefault();
+    const replyContent = replyForm.querySelector('textarea').value;
+    if (replyContent.trim()) {
+        alert('Đã gửi tin nhắn: ' + replyContent);
+        replyForm.querySelector('textarea').value = '';
+        modal.style.display = 'none';
+    } else {
+        alert('Vui lòng nhập nội dung trả lời!');
+    }
+}

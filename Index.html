@@ -10,6 +10,7 @@
     <link href="accept.css" rel="stylesheet">
     <link href="medprof.css" rel="stylesheet">
     <link href="cusprof.css" rel="stylesheet">
+    <link href="reply.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -529,6 +530,18 @@
                             <button class="action-button">Trả lời</button>
                         </li>
                     </ul>
+                </div>
+                <!-- Modal Reply -->
+                <div id="replyModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Trả lời tin nhắn</h3>
+                        <p id="replyTo"></p>
+                        <form class="reply-form">
+                            <textarea placeholder="Nhập nội dung trả lời..."></textarea>
+                            <button type="submit">Gửi</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
